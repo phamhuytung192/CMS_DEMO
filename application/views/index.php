@@ -1,36 +1,13 @@
 <?php
-include "config.php";
-session_start();
 
-if($_SERVER['REQUEST_METHOD']=='POST') {
-    $user = $_POST['user'];
-    $pass = $_POST['pass'];
-
-    $query = "SELECT * FROM user WHERE user = '$user' AND password = '$pass'";
-    $result = mysqli_query($db,$query);
-
-    if(mysqli_num_rows($result)==1) {
-        session_regenerate_id();
-        list ($id, $user, $pass, $role) = mysqli_fetch_array($result,MYSQL_NUM);
-        $_SESSION['id'] = $id;
-        $_SESSION['user'] = $user;
-        $_SESSION['pass'] = $pass;
-        $_SESSION['role'] = $role;
-        header("Location:welcome.php");
-        exit();
-    }
-    else
-        $message = "Username and Password incorrect";
-
-}
 ?>
 <html>
     <head>
         <title>Demo PHP Session 1</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo base_url();?>asset/css/bootstrap.min.css" rel="stylesheet">
 
-        <script src="js/jquery-1.11.2.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url();?>asset/js/jquery-1.11.2.min.js"></script>
+        <script src="<?php echo base_url();?>asset/js/bootstrap.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
